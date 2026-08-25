@@ -1,0 +1,18 @@
+export const STORAGE_KEYS = {
+  FARMXNAP_TOKEN: "farmxnap_token",
+} as const;
+
+export const LoginStep = {
+  REQUEST: "REQUEST",
+  VERIFY: "VERIFY",
+} as const;
+
+export type LoginStep = (typeof LoginStep)[keyof typeof LoginStep];
+
+// User Roles matching the Backend Schema
+export const UserRole = {
+  FARMER: "farmer",
+  AGRODEALER: "agrodealer",
+} as const;
+
+export type UserRole = (typeof UserRole)[keyof typeof UserRole];

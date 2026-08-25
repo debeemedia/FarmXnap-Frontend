@@ -22,6 +22,11 @@
   --color-text-muted: #64748b;
   --color-border: #e2e8f0;
 
+  /* Error Color */
+  --color-error-bg: #fef2f2;
+  --color-error-text: #dc2626;
+  --color-error-border: #fecaca;
+
   /* Typography & Spacing */
   --font-family: "Inter", system-ui, -apple-system, sans-serif;
   --space-xs: 0.5rem; /* 8px */
@@ -56,5 +61,21 @@ body {
   align-items: center;
   justify-content: center;
   padding: var(--space-md);
+  box-sizing: border-box;
+}
+
+/* Error Message Utility */
+.errorMessage {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border: 1px solid var(--color-error-border);
+  padding: var(--space-sm);
+  border-radius: var(--radius-btn);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-md);
+  text-align: center;
+
+  /* Prevent layout jumps & wrap long strings */
+  word-break: break-word;
   box-sizing: border-box;
 }

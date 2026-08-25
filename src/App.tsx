@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { Home } from "./components/Home";
 import { RoleSelection } from "./components/RoleSelection";
 import { APP_ROUTES } from "./routes";
+import { Login } from "./components/Login";
 
 export default function App() {
   return (
@@ -31,12 +32,23 @@ export default function App() {
           }
         />
 
-        {/* Placeholder for login screen */}
+        {/* Login screen */}
+        <Route path={APP_ROUTES.LOGIN} element={<Login />} />
+
+        {/* Placeholders for dashboards */}
         <Route
-          path={APP_ROUTES.LOGIN}
+          path={APP_ROUTES.FARMER_DASHBOARD}
           element={
             <div style={{ padding: "2rem", textAlign: "center" }}>
-              Login Screen
+              Farmer Dashboard
+            </div>
+          }
+        />
+        <Route
+          path={APP_ROUTES.AGRODEALER_DASHBOARD}
+          element={
+            <div style={{ padding: "2rem", textAlign: "center" }}>
+              Agrodealer Dashboard
             </div>
           }
         />
