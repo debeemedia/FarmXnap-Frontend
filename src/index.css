@@ -1,11 +1,20 @@
 :root {
   /* FarmXnap Brand Palette */
+
+  /* Primary Green */
   --color-primary: #16a34a;
   --color-primary-hover: #15803d;
 
+  /* Secondary Amber */
   --color-secondary: #d97706;
   --color-secondary-hover: #b45309;
   --color-secondary-bg-hover: #fffbeb;
+
+  /* Secondary Soft Green */
+  --color-soft-green-text: #166534;
+  --color-soft-green-bg: #f0fdf4;
+  --color-soft-green-border: #bbf7d0;
+  --color-soft-green-bg-hover: #dcfce7;
 
   --color-bg: #f8fafc;
   --color-surface: #ffffff;
@@ -22,4 +31,30 @@
   --space-xl: 2rem; /* 32px */
   --radius-card: 12px;
   --radius-btn: 8px;
+}
+
+/* Global Reset for Full Viewport Centering without scrollbars */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg);
+  font-family: var(--font-family);
+  color: var(--color-text-main);
+}
+
+/* Full Viewport Centering Layout Utility */
+.pageWrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  box-sizing: border-box;
 }

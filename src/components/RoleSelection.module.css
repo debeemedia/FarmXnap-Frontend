@@ -1,12 +1,15 @@
+/* Base styles: Mobile Devices (< 640px) */
+
 .container {
-  width: 90%;
+  width: 100%;
   max-width: 680px;
-  margin: 1.5rem auto;
-  padding: var(--space-lg);
+  padding: var(--space-xl) var(--space-lg);
   background-color: var(--color-surface);
   border-radius: var(--radius-card);
   border: 1px solid var(--color-border);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
   box-sizing: border-box;
 }
 
@@ -41,21 +44,19 @@
   flex-direction: column;
   align-items: flex-start;
   padding: var(--space-md);
-  border: 2px solid var(--color-border);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   text-decoration: none;
   color: inherit;
-  transition:
-    border-color 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease;
   background-color: var(--color-surface);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .card:hover {
   border-color: var(--color-primary);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.12);
+  background-color: var(--color-soft-green-bg);
 }
 
 /* Container for icon badge */
@@ -66,15 +67,15 @@
   width: 48px;
   height: 48px;
   border-radius: 10px;
-  background-color: #f0fdf4; /* Light green tint */
+  background-color: var(--color-soft-green-bg);
+  border: 1px solid var(--color-soft-green-border);
   color: var(--color-primary);
   margin-bottom: var(--space-sm);
 }
 
-/* Ensure SVG strokes match brand primary color */
 .icon {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   stroke: var(--color-primary);
 }
 
@@ -92,7 +93,7 @@
   line-height: 1.4;
 }
 
-/* Back Link Flex Layout with Arrow SVG */
+/* Back Link Layout */
 .backLink {
   display: inline-flex;
   align-items: center;
@@ -116,11 +117,10 @@
   stroke: currentColor;
 }
 
-/* Responsive adjustment for tablets & desktops (>= 640px) */
+/* Tablet & Desktop Adjustments (>= 640px) */
 @media (min-width: 640px) {
   .container {
-    margin: 3rem auto;
-    padding: var(--space-xl);
+    padding: 2.5rem var(--space-xl);
   }
 
   .title {
