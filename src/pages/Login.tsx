@@ -7,6 +7,7 @@ import { ArrowLeftIcon, PlantIcon } from "../components/Icons";
 import styles from "./Login.module.css";
 import { LoginStep, STORAGE_KEYS, UserRole } from "../constants/auth";
 import { ErrorMessage } from "../components/ErrorMessage";
+import { PhoneInput } from "../components/PhoneInput";
 
 // API Response Types matching the backend specs
 type ApiLink = {
@@ -44,14 +45,6 @@ export function Login() {
   const [loading, setLoading] = useState(false);
   // Store the login verification link dynamically
   const [verifyLink, setVerifyLink] = useState<ApiLink | null>(null);
-
-  // Strip non-numeric characters & enforce 10-digit limit
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const digitsOnly = e.target.value.replace(/\D/g, "");
-    if (digitsOnly.length <= 10) {
-      setPhoneNumber(digitsOnly);
-    }
-  };
 
   // Step 1: Request OTP
   const handleRequestOtp = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -159,24 +152,8 @@ export function Login() {
 
         {step === LoginStep.REQUEST ? (
           /* Login Request (Step 1) Form */
-          <form onSubmit={handleRequestOtp} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="phoneNumber" className={styles.label}>
-                Phone Number
-              </label>
-              <div className={styles.phoneInputWrapper}>
-                <span className={styles.prefix}>+234</span>
-                <input
-                  id="phoneNumber"
-                  type="tel"
-                  className={styles.phoneInput}
-                  placeholder="8012345678"
-                  value={phoneNumber}
-                  onChange={handlePhoneChange}
-                  autoFocus
-                />
-              </div>
-            </div>
+          <form onSubmit={handleRequestOtp} className="form">
+            <PhoneInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />
 
             <button
               type="submit"
@@ -188,15 +165,15 @@ export function Login() {
           </form>
         ) : (
           /* Login Verification (Step 2) Form */
-          <form onSubmit={handleVerifyOtp} className={styles.form}>
-            <div className={styles.inputGroup}>
-              <label htmlFor="otp" className={styles.label}>
+          <form onSubmit={handleVerifyOtp} className="form">
+            <div className="inputGroup">
+              <label htmlFor="otp" className="label">
                 One-Time Password (OTP)
               </label>
               <input
                 id="otp"
                 type="text"
-                className={styles.input}
+                className="input"
                 placeholder="123456"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
