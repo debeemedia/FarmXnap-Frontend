@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import styles from "./Home.module.css";
 import { APP_ROUTES } from "../routes";
-import { PlantIcon } from "./Icons";
+import { PlantIcon } from "../components/Icons";
 
 export function Home() {
   return (

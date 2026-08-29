@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiFetch } from "../services/api";
 import { APP_ROUTES } from "../routes";
-import { ArrowLeftIcon, PlantIcon } from "./Icons";
+import { ArrowLeftIcon, PlantIcon } from "../components/Icons";
 import styles from "./Login.module.css";
 import { LoginStep, STORAGE_KEYS, UserRole } from "../constants/auth";
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { APP_ROUTES } from "../routes";
-import { PlantIcon, StoreIcon, ArrowLeftIcon } from "./Icons";
+import { PlantIcon, StoreIcon, ArrowLeftIcon } from "../components/Icons";
 import styles from "./RoleSelection.module.css";
 
 export function RoleSelection() {

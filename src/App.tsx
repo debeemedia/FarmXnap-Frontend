@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router";
-import { Home } from "./components/Home";
-import { RoleSelection } from "./components/RoleSelection";
+import { Home } from "./pages/Home";
+import { RoleSelection } from "./pages/RoleSelection";
 import { APP_ROUTES } from "./routes";
-import { Login } from "./components/Login";
+import { Login } from "./pages/Login";
 
 export default function App() {
   return (
