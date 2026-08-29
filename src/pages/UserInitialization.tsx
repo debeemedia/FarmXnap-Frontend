@@ -83,7 +83,7 @@ export function UserInitialization({
           </p>
         </div>
 
-        {error && <ErrorMessage />}
+        {error && <ErrorMessage errorMessage={error} />}
 
         <form onSubmit={handleRequestOtp} className="form">
           <PhoneInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />

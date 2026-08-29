@@ -146,7 +146,7 @@ export function Login() {
           </p>
         </div>
 
-        {error && <ErrorMessage />}
+        {error && <ErrorMessage errorMessage={error} />}
 
         {step === LoginStep.REQUEST ? (
           /* Login Request (Step 1) Form */
