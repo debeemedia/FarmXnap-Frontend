@@ -174,7 +174,8 @@ export function Login() {
                 id="otp"
                 type="text"
                 className="input"
-                placeholder="123456"
+                // placeholder="123456"
+                readOnly // Autofill enabled for now
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 maxLength={6}
