@@ -6,6 +6,7 @@ import { APP_ROUTES } from "../routes";
 import { ArrowLeftIcon, PlantIcon } from "../components/Icons";
 import styles from "./Login.module.css";
 import { LoginStep, STORAGE_KEYS, UserRole } from "../constants/auth";
+import { ErrorMessage } from "../components/ErrorMessage";
 
 // API Response Types matching the backend specs
 type ApiLink = {
@@ -154,7 +155,7 @@ export function Login() {
           </p>
         </div>
 
-        {error && <div className="errorMessage">{error}</div>}
+        {error && <ErrorMessage />}
 
         {step === LoginStep.REQUEST ? (
           /* Login Request (Step 1) Form */
