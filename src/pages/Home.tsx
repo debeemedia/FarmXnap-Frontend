@@ -1,7 +1,7 @@
-import { Link } from "react-router";
 import styles from "./Home.module.css";
 import { APP_ROUTES } from "../routes";
 import { PlantIcon } from "../components/Icons";
+import { Button } from "../components/Button";
 
 export function Home() {
   return (
@@ -20,14 +20,12 @@ export function Home() {
 
         <div className={styles.actionGroup}>
           {/* Navigates to role selection before signing up */}
-          <Link to={APP_ROUTES.SELECT_ROLE} className={styles.btnPrimary}>
-            Get Started
-          </Link>
+          <Button linkTo={APP_ROUTES.SELECT_ROLE}>Get Started</Button>
 
           {/* Navigates directly to login */}
-          <Link to={APP_ROUTES.LOGIN} className={styles.btnSecondary}>
+          <Button linkTo={APP_ROUTES.LOGIN} variant="secondary">
             Log In
-          </Link>
+          </Button>
         </div>
       </div>
     </div>

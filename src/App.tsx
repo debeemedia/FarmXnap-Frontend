@@ -3,6 +3,7 @@ import { Home } from "./pages/Home";
 import { RoleSelection } from "./pages/RoleSelection";
 import { APP_ROUTES } from "./routes";
 import { Login } from "./pages/Login";
+import { FarmerRegistration } from "./pages/FarmerRegistration";
 
 export default function App() {
   return (
@@ -17,11 +18,7 @@ export default function App() {
         {/* Placeholders for signup forms */}
         <Route
           path={APP_ROUTES.SIGNUP_FARMER}
-          element={
-            <div style={{ padding: "2rem", textAlign: "center" }}>
-              Farmer Signup Form
-            </div>
-          }
+          element={<FarmerRegistration />}
         />
         <Route
           path={APP_ROUTES.SIGNUP_AGRODEALER}

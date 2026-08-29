@@ -3,18 +3,16 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { apiFetch } from "../services/api";
 import { APP_ROUTES } from "../routes";
-import { ArrowLeftIcon, PlantIcon } from "../components/Icons";
-import styles from "./Login.module.css";
+import { PlantIcon } from "../components/Icons";
+import styles from "./Auth.module.css";
 import { LoginStep, STORAGE_KEYS, UserRole } from "../constants/auth";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { PhoneInput } from "../components/PhoneInput";
+import type { ApiLink } from "../types/common";
+import { BackLink } from "../components/BackLink";
+import { Button } from "../components/Button";
 
 // API Response Types matching the backend specs
-type ApiLink = {
-  method: string;
-  href: string;
-};
-
 type LoginRequestResponse = {
   message: string;
   data: {
@@ -155,13 +153,15 @@ export function Login() {
           <form onSubmit={handleRequestOtp} className="form">
             <PhoneInput phoneNumber={phoneNumber} onChange={setPhoneNumber} />
 
-            <button
+            <Button
+              variant="primary"
               type="submit"
-              className={styles.btnPrimary}
-              disabled={loading || phoneNumber.length !== 10}
+              loading={loading}
+              loadingText="Sending OTP..."
+              disabled={phoneNumber.length !== 10}
             >
-              {loading ? "Sending OTP..." : "Continue"}
-            </button>
+              Continue
+            </Button>
           </form>
         ) : (
           /* Login Verification (Step 2) Form */
@@ -182,39 +182,37 @@ export function Login() {
               />
             </div>
 
-            <button
+            <Button
               type="submit"
-              className={styles.btnPrimary}
-              disabled={loading}
+              loading={loading}
+              loadingText="Verifying..."
+              disabled={phoneNumber.length !== 10}
             >
-              {loading ? "Verifying..." : "Verify & Log In"}
-            </button>
+              Verify & Log In
+            </Button>
 
-            <button
+            <Button
               type="button"
-              className={styles.btnText}
+              variant="text"
               onClick={() => {
                 setStep(LoginStep.REQUEST);
                 setError(null);
               }}
             >
               Change Phone Number
-            </button>
+            </Button>
           </form>
         )}
 
         <div className={styles.footer}>
-          <p className={styles.signupPrompt}>
+          <p className={styles.authPrompt}>
             Don't have an account?{" "}
             <Link to={APP_ROUTES.SELECT_ROLE} className={styles.link}>
               Sign Up
             </Link>
           </p>
 
-          <Link to={APP_ROUTES.HOME} className={styles.backLink}>
-            <ArrowLeftIcon className={styles.backIcon} />
-            <span>Back to Home</span>
-          </Link>
+          <BackLink />
         </div>
       </div>
     </div>
