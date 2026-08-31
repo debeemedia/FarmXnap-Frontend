@@ -5,6 +5,7 @@ import { APP_ROUTES } from "./routes";
 import { Login } from "./pages/Login";
 import { FarmerRegistration } from "./pages/FarmerRegistration";
 import { UserRole } from "./constants/auth";
+import { Construction } from "./components/Construction";
 
 export default function App() {
   return (
@@ -25,7 +26,7 @@ export default function App() {
           path={APP_ROUTES.SIGNUP_AGRODEALER}
           element={
             <div style={{ padding: "2rem", textAlign: "center" }}>
-              Agrodealer Signup Form
+              <Construction title="Agrodealer Signup" />
             </div>
           }
         />
@@ -60,9 +61,11 @@ function ProfileDashboardPlaceholder({ role }: { role: UserRole }) {
       {successMessage && (
         <p style={{ color: "green", marginBottom: "1rem" }}>{successMessage}</p>
       )}
-      <h1>
-        {(role === UserRole.FARMER ? "Farmer" : "AgroDealer") + " Dashboard"}
-      </h1>
+      <Construction
+        title={
+          (role === UserRole.FARMER ? "Farmer" : "AgroDealer") + " Dashboard"
+        }
+      />
     </div>
   );
 }
