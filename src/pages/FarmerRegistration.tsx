@@ -231,6 +231,17 @@ export function FarmerRegistration() {
             >
               Next
             </Button>
+
+            <Button
+              type="button"
+              variant="text"
+              onClick={() => {
+                setInitData(null);
+                setError(null);
+              }}
+            >
+              Change Phone Number
+            </Button>
           </form>
 
           <div className={styles.footer}>
