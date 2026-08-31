@@ -1,3 +1,4 @@
+import { sanitizeNumericInput } from "../utils/helpers";
 import styles from "./PhoneInput.module.css";
 
 interface PhoneInputProps {
@@ -8,10 +9,7 @@ interface PhoneInputProps {
 export function PhoneInput({ phoneNumber, onChange }: PhoneInputProps) {
   // Strip non-numeric characters & enforce 10-digit limit
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const digitsOnly = e.target.value.replace(/\D/g, "");
-    if (digitsOnly.length <= 10) {
-      onChange(digitsOnly);
-    }
+    onChange(sanitizeNumericInput(e.target.value, 10));
   };
 
   return (

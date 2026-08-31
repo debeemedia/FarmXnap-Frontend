@@ -2,7 +2,6 @@ import { useState } from "react";
 import { apiFetch } from "../services/api";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { PhoneInput } from "../components/PhoneInput";
-import type { ApiLink } from "../types/common";
 import styles from "./Auth.module.css";
 import { PlantIcon, StoreIcon } from "../components/Icons";
 import { UserRole } from "../constants/auth";
@@ -10,22 +9,10 @@ import { Link } from "react-router-dom";
 import { APP_ROUTES } from "../routes";
 import { BackLink } from "../components/BackLink";
 import { Button } from "../components/Button";
-
-type UserInitializationResponse = {
-  message: string;
-  data: {
-    token: string;
-    user: {
-      id: string;
-      phone_number: string;
-    };
-    OTP: string;
-    links: Record<string, ApiLink>;
-  };
-};
+import type { UserInitializationResponse } from "../types/auth";
 
 interface UserInitializationProps {
-  onSuccess: ({ userId, otp }: { userId: string; otp: string }) => void;
+  onSuccess: (data: UserInitializationResponse["data"]) => void;
   role: UserRole;
 }
 
@@ -52,13 +39,8 @@ export function UserInitialization({
         body: JSON.stringify({ phone_number: phoneNumber }),
       });
 
-      if (response.data?.OTP) {
-        // Pass the otp and other details up to the parent component
-        onSuccess({
-          userId: response.data.user.id,
-          otp: response.data.OTP,
-        });
-      }
+      // Pass the otp and other details up to the parent component
+      onSuccess(response.data);
     } catch (error) {
       const message =
         error instanceof Error ? error.message : "Failed to request OTP.";

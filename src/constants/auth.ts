@@ -16,3 +16,11 @@ export const UserRole = {
 } as const;
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole];
+
+export const RegistrationStep = {
+  PROFILE: "PROFILE",
+  TRANSACTION_PIN: "TRANSACTION_PIN",
+} as const;
+
+export type RegistrationStep =
+  (typeof RegistrationStep)[keyof typeof RegistrationStep];
