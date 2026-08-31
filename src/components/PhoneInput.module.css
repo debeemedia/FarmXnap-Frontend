@@ -19,6 +19,8 @@
   font-weight: 600;
   color: var(--color-text-muted);
   user-select: none;
+
+  flex-shrink: 0; /* 1. Partial Hidden Prefix: STOP mobile browsers from squeezing the prefix */
 }
 
 .phoneInput {
@@ -29,4 +31,8 @@
   font-size: 0.95rem;
   background-color: transparent;
   color: var(--color-text-main);
+
+  min-width: 0; /* 2. Partial Hidden Prefix: ALLOW input to fit flexible space without pushing prefix */
+  -webkit-appearance: none; /* 3. Partial Hidden Prefix: STRIP Android default input margins */
+  appearance: none;
 }
