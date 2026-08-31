@@ -24,11 +24,7 @@ export default function App() {
         {/* Placeholder for Agrodealer signup form */}
         <Route
           path={APP_ROUTES.SIGNUP_AGRODEALER}
-          element={
-            <div style={{ padding: "2rem", textAlign: "center" }}>
-              <Construction title="Agrodealer Signup" />
-            </div>
-          }
+          element={<Construction title="Agrodealer Signup" />}
         />
 
         {/* Login screen */}
@@ -56,15 +52,14 @@ function ProfileDashboardPlaceholder({ role }: { role: UserRole }) {
   const successMessage = location.state?.successMessage;
 
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      {/* If a success message was passed during navigation, display it */}
-      {successMessage && (
-        <p style={{ color: "green", marginBottom: "1rem" }}>{successMessage}</p>
-      )}
+    <div>
       <Construction
         title={
           (role === UserRole.FARMER ? "Farmer" : "AgroDealer") + " Dashboard"
         }
+        successMessage={
+          /* If a success message was passed during navigation, display it */
+          successMessage}
       />
     </div>
   );
