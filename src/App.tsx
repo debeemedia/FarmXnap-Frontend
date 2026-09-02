@@ -6,6 +6,7 @@ import { Login } from "./pages/Login";
 import { FarmerRegistration } from "./pages/FarmerRegistration";
 import { UserRole } from "./constants/auth";
 import { Construction } from "./components/Construction";
+import { AgroDealerRegistration } from "./pages/AgroDealerRegistration";
 
 export default function App() {
   return (
@@ -17,14 +18,15 @@ export default function App() {
         {/* Role selection screen */}
         <Route path={APP_ROUTES.SELECT_ROLE} element={<RoleSelection />} />
 
+        {/* Farmer signup form */}
         <Route
           path={APP_ROUTES.SIGNUP_FARMER}
           element={<FarmerRegistration />}
         />
-        {/* Placeholder for Agrodealer signup form */}
+        {/* Agrodealer signup form */}
         <Route
           path={APP_ROUTES.SIGNUP_AGRODEALER}
-          element={<Construction title="Agrodealer Signup" />}
+          element={<AgroDealerRegistration />}
         />
 
         {/* Login screen */}
@@ -59,7 +61,8 @@ function ProfileDashboardPlaceholder({ role }: { role: UserRole }) {
         }
         successMessage={
           /* If a success message was passed during navigation, display it */
-          successMessage}
+          successMessage
+        }
       />
     </div>
   );

@@ -101,3 +101,8 @@ body {
   flex-direction: column;
   gap: var(--space-md);
 }
+
+.errorText {
+  color: var(--color-error-text);
+  margin: var(--space-sm) auto;
+}

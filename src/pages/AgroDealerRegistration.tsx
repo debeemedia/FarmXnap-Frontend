@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { UserInitialization } from "./UserInitialization";
-import { RegistrationStep, STORAGE_KEYS, UserRole } from "../constants/auth";
-import { apiFetch } from "../services/api";
 import type {
   ProfileRegistrationResponse,
   UserInitializationResponse,
 } from "../types/auth";
-import { PlantIcon } from "../components/Icons";
-import { ErrorMessage } from "../components/ErrorMessage";
+import { UserInitialization } from "./UserInitialization";
+import { RegistrationStep, STORAGE_KEYS, UserRole } from "../constants/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { apiFetch } from "../services/api";
+import { APP_ROUTES } from "../routes";
 import styles from "./Auth.module.css";
+import { StoreIcon } from "../components/Icons";
+import { ErrorMessage } from "../components/ErrorMessage";
+import { LocationSelect } from "../components/LocationSelect";
 import { Button } from "../components/Button";
 import { BackLink } from "../components/BackLink";
-import { Link, useNavigate } from "react-router-dom";
-import { APP_ROUTES } from "../routes";
-import { LocationSelect } from "../components/LocationSelect";
 import { TransactionPinStep } from "./TransactionPinStep";
+import { BankAccountFields } from "../components/BankAccountFields";
 
-export function FarmerRegistration() {
+export function AgroDealerRegistration() {
   const navigate = useNavigate();
 
   const [initData, setInitData] = useState<
@@ -29,13 +30,16 @@ export function FarmerRegistration() {
   const [formData, setFormData] = useState({
     otp: "",
     transaction_pin: "",
-    first_name: "",
-    last_name: "",
+    business_name: "",
+    business_address: "",
     state: "",
     lga: "",
-    address: "",
-    primary_crop: "",
+    cac_registration_number: "",
+    bank_code: "", // Supply the code that corresponds to the bank name the user selects.
+    bank_account_number: "",
   });
+
+  const [bankAccountName, setBankAccountName] = useState("");
 
   // Conditionally determine which screen to display
   if (!initData) {
@@ -50,7 +54,7 @@ export function FarmerRegistration() {
             otp: data.OTP || "",
           }));
         }}
-        role={UserRole.FARMER}
+        role={UserRole.AGRODEALER}
       />
     );
   }
@@ -84,11 +88,12 @@ export function FarmerRegistration() {
       return setError("Please enter the OTP.");
     }
 
-    const farmerRegistrationLink = initData.links.create_farmer_profile;
+    const agroDealerRegistrationLink =
+      initData.links.create_agro_dealer_profile;
 
-    if (!farmerRegistrationLink) {
+    if (!agroDealerRegistrationLink) {
       setError(
-        "Farmer registration endpoint not provided by server. Please try requesting OTP again.",
+        "AgroDealer registration endpoint not provided by server. Please try requesting OTP again.",
       );
       return;
     }
@@ -98,9 +103,9 @@ export function FarmerRegistration() {
 
     try {
       const response = await apiFetch<ProfileRegistrationResponse>(
-        farmerRegistrationLink.href,
+        agroDealerRegistrationLink.href,
         {
-          method: farmerRegistrationLink.method,
+          method: agroDealerRegistrationLink.method,
           body: JSON.stringify(formData),
         },
       );
@@ -108,7 +113,7 @@ export function FarmerRegistration() {
       // Handle auth storage and navigation on success
       localStorage.setItem(STORAGE_KEYS.FARMXNAP_TOKEN, response.data.token);
 
-      navigate(APP_ROUTES.FARMER_DASHBOARD, {
+      navigate(APP_ROUTES.AGRODEALER_DASHBOARD, {
         // Persist display of the success message on the redirected page. Ensure to handle "successMessage" on the page with e.g useLocation
         state: { successMessage: response.message },
       });
@@ -126,10 +131,10 @@ export function FarmerRegistration() {
         <div className={styles.container}>
           <div className={styles.header}>
             <div className={styles.iconWrapper}>
-              <PlantIcon className={styles.brandIcon} />
+              <StoreIcon className={styles.brandIcon} />
             </div>
             <h1 className={styles.title}>Sign Up</h1>
-            <p className={styles.subtitle}>Register as a farmer</p>
+            <p className={styles.subtitle}>Register as an agrodealer</p>
           </div>
           {error && <ErrorMessage errorMessage={error} />}
           <form
@@ -141,42 +146,29 @@ export function FarmerRegistration() {
             className="form"
           >
             <div className="inputGroup">
-              <label htmlFor="firstName" className="label">
-                First Name
+              <label htmlFor="businessName" className="label">
+                Business Name
               </label>
               <input
-                id="firstName"
-                name="first_name"
+                id="businessName"
+                name="business_name"
                 type="text"
                 className="input"
-                placeholder="Emeka"
-                value={formData.first_name}
+                placeholder="EMOK Enterprises"
+                value={formData.business_name}
                 onChange={handleChange}
               />
 
-              <label htmlFor="lastName" className="label">
-                Last Name
+              <label htmlFor="businessAddress" className="label">
+                Business Address
               </label>
               <input
-                id="lastName"
-                name="last_name"
-                type="text"
-                className="input"
-                placeholder="Okafor"
-                value={formData.last_name}
-                onChange={handleChange}
-              />
-
-              <label htmlFor="address" className="label">
-                Address
-              </label>
-              <input
-                id="address"
-                name="address"
+                id="businessAddress"
+                name="business_address"
                 type="text"
                 className="input"
                 placeholder="1, Broad Street"
-                value={formData.address}
+                value={formData.business_address}
                 onChange={handleChange}
               />
 
@@ -187,17 +179,24 @@ export function FarmerRegistration() {
                 onStateResetLga={onStateResetLga}
               />
 
-              <label htmlFor="primaryCrop" className="label">
-                Primary Crop
+              <label htmlFor="cacRegistrationNumber" className="label">
+                CAC Registration Number
               </label>
               <input
-                id="primaryCrop"
-                name="primary_crop"
+                id="address"
+                name="cac_registration_number"
                 type="text"
                 className="input"
-                placeholder="Maize"
-                value={formData.primary_crop}
+                placeholder="RC 1234567"
+                value={formData.cac_registration_number}
                 onChange={handleChange}
+              />
+
+              <BankAccountFields
+                onChange={handleChange}
+                selectedBankCode={formData.bank_code}
+                bankAccountNumber={formData.bank_account_number}
+                onBankAccountVerified={setBankAccountName}
               />
 
               <label htmlFor="otp" className="label">
@@ -216,8 +215,8 @@ export function FarmerRegistration() {
 
             <Button
               type="submit"
-              // Disable if any of the profile fields is not populated
-              disabled={!isProfileComplete}
+              // Disable if any of the profile fields is not populated or if the bank account is not verified
+              disabled={!isProfileComplete || !bankAccountName}
             >
               Next
             </Button>
