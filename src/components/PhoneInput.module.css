@@ -1,0 +1,38 @@
+/* Phone Prefix Group */
+.phoneInputWrapper {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  background-color: var(--color-surface);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.phoneInputWrapper:focus-within {
+  border-color: var(--color-primary);
+}
+
+.prefix {
+  padding: var(--space-sm) var(--space-sm) var(--space-sm) var(--space-md);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  user-select: none;
+
+  flex-shrink: 0; /* 1. Partial Hidden Prefix: STOP mobile browsers from squeezing the prefix */
+}
+
+.phoneInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: var(--space-sm);
+  font-size: 0.95rem;
+  background-color: transparent;
+  color: var(--color-text-main);
+
+  min-width: 0; /* 2. Partial Hidden Prefix: ALLOW input to fit flexible space without pushing prefix */
+  -webkit-appearance: none; /* 3. Partial Hidden Prefix: STRIP Android default input margins */
+  appearance: none;
+}
