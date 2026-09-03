@@ -45,7 +45,7 @@ export function BankAccountFields({
     () => {
       let isMounted = true;
 
-      async function listBanks() {
+      (async () => {
         setLoadingBanks(true);
         setError(null);
 
@@ -68,9 +68,7 @@ export function BankAccountFields({
             setLoadingBanks(false);
           }
         }
-      }
-
-      listBanks();
+      })();
 
       return () => {
         isMounted = false;
@@ -89,7 +87,7 @@ export function BankAccountFields({
         return;
       }
 
-      async function verifyBankAccount() {
+      (async () => {
         try {
           setVerifyingBankAccount(true);
           setError(null);
@@ -123,9 +121,7 @@ export function BankAccountFields({
             setVerifyingBankAccount(false);
           }
         }
-      }
-
-      verifyBankAccount();
+      })();
 
       return () => {
         isMounted = false;
