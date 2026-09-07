@@ -8,19 +8,19 @@ import type {
 import type { APP_ROUTES } from "../routes";
 import { apiFetch } from "../services/api";
 
-interface UseRegistrationFlowOptions {
-  initialFormData: Record<string, string>;
+interface UseRegistrationFlowOptions<T extends Record<string, string>> {
+  initialFormData: T;
   linkKey: "create_farmer_profile" | "create_agro_dealer_profile";
   dashboardRoute:
     | typeof APP_ROUTES.FARMER_DASHBOARD
     | typeof APP_ROUTES.AGRODEALER_DASHBOARD;
 }
 
-export function useRegistrationFlow({
+export function useRegistrationFlow<T extends Record<string, string>>({
   initialFormData,
   linkKey,
   dashboardRoute,
-}: UseRegistrationFlowOptions) {
+}: UseRegistrationFlowOptions<T>) {
   const navigate = useNavigate();
 
   const [initData, setInitData] = useState<
