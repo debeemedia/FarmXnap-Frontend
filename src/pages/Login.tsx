@@ -5,12 +5,13 @@ import { apiFetch } from "../services/api";
 import { APP_ROUTES } from "../routes";
 import { PlantIcon } from "../components/Icons";
 import styles from "./Auth.module.css";
-import { LoginStep, STORAGE_KEYS, UserRole } from "../constants/auth";
+import { LoginStep, UserRole } from "../constants/auth";
 import { ErrorMessage } from "../components/ErrorMessage";
 import { PhoneInput } from "../components/PhoneInput";
 import type { ApiLink } from "../types/common";
 import { BackLink } from "../components/BackLink";
 import { Button } from "../components/Button";
+import { useAuth } from "../context/AuthContext";
 
 // API Response Types matching the backend specs
 type LoginRequestResponse = {
@@ -35,6 +36,7 @@ type LoginVerifyResponse = {
 
 export function Login() {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [step, setStep] = useState<LoginStep>(LoginStep.REQUEST);
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -111,7 +113,7 @@ export function Login() {
       });
 
       // Persist access token
-      localStorage.setItem(STORAGE_KEYS.FARMXNAP_TOKEN, response.data.token);
+      login(response.data.token);
 
       // Redirect user to dashboard depending on role
       const role = response.data.user.role;

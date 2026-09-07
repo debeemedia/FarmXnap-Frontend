@@ -1,4 +1,5 @@
 import { STORAGE_KEYS } from "../constants/auth";
+import { AUTH_ERROR_EVENT } from "../constants/events";
 
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const API_PREFIX = import.meta.env.VITE_API_PREFIX;
@@ -44,12 +45,12 @@ export async function apiFetch<T>(
   if (!response.ok) {
     const errorData = await response.json().catch(() => ({}));
 
-    // Auto-clear auth token on 401 Unauthorized
+    // Handle 401 Unauthorized
     if (response.status === 401) {
-      localStorage.removeItem(STORAGE_KEYS.FARMXNAP_TOKEN);
-      /**
-       * @todo: Add global redirect logic
-       */
+      // window.location.href = APP_ROUTES.LOGIN; // Don't do this. Non-seamless navigation
+
+      // Broadcast an event, listen for it and handle accordinly in AuthContext
+      window.dispatchEvent(new Event(AUTH_ERROR_EVENT));
     }
 
     const errorMessage =
