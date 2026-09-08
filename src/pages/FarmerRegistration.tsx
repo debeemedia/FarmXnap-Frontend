@@ -125,13 +125,14 @@ export function FarmerRegistration() {
               onChange={handleChange}
             />
 
-            <label htmlFor="otp" className="label">
+            {/* <label htmlFor="otp" className="label">
               OTP
-            </label>
+            </label> */}
             <input
               id="otp"
               name="otp"
-              type="text"
+              // type="text"
+              type="hidden"
               className="input"
               readOnly
               value={formData.otp}
