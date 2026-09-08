@@ -1,5 +1,4 @@
 import { SpannerIcon } from "./Icons";
-import { BackLink } from "./BackLink";
 import styles from "./Construction.module.css";
 import { Button } from "./Button";
 
@@ -37,8 +36,6 @@ export function Construction({
               Logout
             </Button>
           )}
-
-          <BackLink />
         </div>
       </div>
     </div>
