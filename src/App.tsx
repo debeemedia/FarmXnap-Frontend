@@ -18,10 +18,8 @@ export default function App() {
         <Routes>
           {/* Landing screen */}
           <Route path={APP_ROUTES.HOME} element={<Home />} />
-
           {/* Role selection screen */}
           <Route path={APP_ROUTES.SELECT_ROLE} element={<RoleSelection />} />
-
           {/* Farmer signup form */}
           <Route
             path={APP_ROUTES.SIGNUP_FARMER}
@@ -32,17 +30,20 @@ export default function App() {
             path={APP_ROUTES.SIGNUP_AGRODEALER}
             element={<AgroDealerRegistration />}
           />
-
           {/* Login screen */}
           <Route path={APP_ROUTES.LOGIN} element={<Login />} />
-
-          {/* Protected Routes */}
-          <Route element={<ProtectedRoute />}>
-            {/* Placeholders for dashboards */}
+          {/* PROTECTED ROUTES */}
+          <Route element={<ProtectedRoute allowedRoles={[UserRole.FARMER]} />}>
+            {/* Farmer protected routes */}
             <Route
               path={APP_ROUTES.FARMER_DASHBOARD}
               element={<ProfileDashboardPlaceholder role={UserRole.FARMER} />}
             />
+          </Route>
+          <Route
+            element={<ProtectedRoute allowedRoles={[UserRole.AGRODEALER]} />}
+          >
+            {/* Agrodealer protected routes */}
             <Route
               path={APP_ROUTES.AGRODEALER_DASHBOARD}
               element={
@@ -50,6 +51,8 @@ export default function App() {
               }
             />
           </Route>
+          {/* Any general protected route (accessible by any logged-in user) */}
+          <Route element={<ProtectedRoute />}></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

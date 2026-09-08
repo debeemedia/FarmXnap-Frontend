@@ -1,5 +1,6 @@
 export const STORAGE_KEYS = {
   FARMXNAP_TOKEN: "farmxnap_token",
+  FARMXNAP_USER_ROLE: "farmxnap_user_role",
 } as const;
 
 export const LoginStep = {
