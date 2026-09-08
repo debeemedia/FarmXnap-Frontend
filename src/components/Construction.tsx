@@ -37,8 +37,6 @@ export function Construction({
               Logout
             </Button>
           )}
-
-          <BackLink />
         </div>
       </div>
     </div>
