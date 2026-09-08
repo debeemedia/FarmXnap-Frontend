@@ -82,8 +82,6 @@ export function BankAccountFields({
       let isMounted = true;
 
       if (!selectedBankCode || bankAccountNumber.length !== 10) {
-        setBankAccountName("");
-        onBankAccountVerified("");
         return;
       }
 
@@ -130,13 +128,29 @@ export function BankAccountFields({
     [
       selectedBankCode,
       bankAccountNumber,
+      onBankAccountVerified,
     ] /** Run anytime any time the bank code or account number changes */,
   );
 
   const handleAccountNumberChange = (
     e: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    e.target.value = sanitizeNumericInput(e.target.value, 10);
+    const value = sanitizeNumericInput(e.target.value, 10);
+    e.target.value = value;
+
+    // Reset name directly when typing/deleting, not in useEffect
+    if (value.length !== 10) {
+      setBankAccountName("");
+      onBankAccountVerified("");
+    }
+
+    onChange(e);
+  };
+
+  const handleBankSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setBankAccountName("");
+    onBankAccountVerified("");
+
     onChange(e);
   };
 
@@ -152,7 +166,7 @@ export function BankAccountFields({
         name="bank_code"
         className="input"
         value={selectedBankCode}
-        onChange={onChange}
+        onChange={handleBankSelect}
         disabled={loadingBanks}
       >
         <option value="">
