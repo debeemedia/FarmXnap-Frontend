@@ -61,12 +61,13 @@ export function useRegistrationFlow<T extends Record<string, string>>({
 
   const isProfileComplete = Object.entries(formData)
     .filter(([key]) => key !== "transaction_pin")
-    .every(([_, value]) =>
+    .every(([, value]) =>
       typeof value === "string" ? value.trim() !== "" : Boolean(value),
     );
 
   const resetPhoneNumber = () => {
-    (setInitData(null), setError(null));
+    setInitData(null);
+    setError(null);
   };
 
   const handleFinalSubmit = async () => {

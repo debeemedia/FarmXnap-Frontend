@@ -8,7 +8,8 @@ import { UserRole } from "./constants/auth";
 import { Construction } from "./components/Construction";
 import { AgroDealerRegistration } from "./pages/AgroDealerRegistration";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { useAuth } from "./hooks/useAuth";
+import { AuthProvider } from "./context/AuthProvider";
 
 export default function App() {
   return (

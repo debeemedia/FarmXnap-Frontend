@@ -11,7 +11,7 @@ import { PhoneInput } from "../components/PhoneInput";
 import type { ApiLink } from "../types/common";
 import { BackLink } from "../components/BackLink";
 import { Button } from "../components/Button";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../hooks/useAuth";
 
 // API Response Types matching the backend specs
 type LoginRequestResponse = {
