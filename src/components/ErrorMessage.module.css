@@ -1,0 +1,15 @@
+/* Error Message Utility */
+.errorMessage {
+  background-color: var(--color-error-bg);
+  color: var(--color-error-text);
+  border: 1px solid var(--color-error-border);
+  padding: var(--space-sm);
+  border-radius: var(--radius-btn);
+  font-size: 0.875rem;
+  margin-bottom: var(--space-md);
+  text-align: center;
+
+  /* Prevent layout jumps & wrap long strings */
+  word-break: break-word;
+  box-sizing: border-box;
+}

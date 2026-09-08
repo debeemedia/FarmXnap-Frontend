@@ -1,0 +1,71 @@
+/* Base styles: Mobile Devices (< 640px) */
+
+/* Card Container */
+.container {
+  width: 100%;
+  max-width: 440px;
+  padding: var(--space-xl) var(--space-lg);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.05),
+    0 4px 6px -2px rgba(0, 0, 0, 0.02);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Plant Icon Badge */
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-soft-green-bg);
+  border: 1px solid var(--color-soft-green-border);
+  margin: 0 auto var(--space-md) auto;
+}
+
+.brandIcon {
+  width: 28px;
+  height: 28px;
+  stroke: var(--color-primary);
+}
+
+.brand {
+  font-size: 1.875rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-xs) 0;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  margin-bottom: var(--space-lg);
+  line-height: 1.5;
+}
+
+.actionGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Tablet & Desktop Adjustments (>= 640px) */
+@media (min-width: 640px) {
+  .container {
+    padding: 2.5rem var(--space-xl);
+  }
+
+  .brand {
+    font-size: 2.25rem;
+  }
+
+  .tagline {
+    font-size: 1rem;
+  }
+}

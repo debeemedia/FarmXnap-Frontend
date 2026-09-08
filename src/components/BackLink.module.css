@@ -1,0 +1,22 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.backLink:hover {
+  color: var(--color-text-main);
+}
+
+.backIcon {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
