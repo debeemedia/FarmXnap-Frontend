@@ -112,12 +112,12 @@ export function Login() {
         }),
       });
 
-      // Persist access token
-      login(response.data.token);
-
-      // Redirect user to dashboard depending on role
       const role = response.data.user.role;
 
+      // Persist access token
+      login(response.data.token, role);
+
+      // Redirect user to dashboard depending on role
       if (role === UserRole.FARMER) {
         navigate(APP_ROUTES.FARMER_DASHBOARD);
       } else if (role === UserRole.AGRODEALER) {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AUTH_ERROR_EVENT } from "../constants/events";
-import { STORAGE_KEYS } from "../constants/auth";
+import { STORAGE_KEYS, UserRole } from "../constants/auth";
 import { apiFetch } from "../services/api";
 import { AuthContext } from "./AuthContext";
 
@@ -8,11 +8,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState(() =>
     localStorage.getItem(STORAGE_KEYS.FARMXNAP_TOKEN),
   );
+  const [userRole, setUserRole] = useState<UserRole | null>(
+    () => localStorage.getItem(STORAGE_KEYS.FARMXNAP_USER_ROLE) as UserRole,
+  );
 
-  const login = (token: string) => {
+  const login = (token: string, userRole: UserRole) => {
     localStorage.setItem(STORAGE_KEYS.FARMXNAP_TOKEN, token);
+    localStorage.setItem(STORAGE_KEYS.FARMXNAP_USER_ROLE, userRole);
 
     setToken(token);
+    setUserRole(userRole);
   };
 
   /**
@@ -22,8 +27,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const clearAuth = () => {
     localStorage.removeItem(STORAGE_KEYS.FARMXNAP_TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.FARMXNAP_USER_ROLE);
 
     setToken(null);
+    setUserRole(null);
   };
 
   const logout = async () => {
@@ -54,5 +61,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
-  return <AuthContext value={{ token, logout, login }}>{children}</AuthContext>;
+  return (
+    <AuthContext value={{ token, userRole, logout, login }}>
+      {children}
+    </AuthContext>
+  );
 }
