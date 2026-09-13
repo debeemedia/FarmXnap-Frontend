@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { RegistrationStep, STORAGE_KEYS } from "../constants/auth";
+import { RegistrationStep } from "../constants/auth";
 import type {
   ProfileRegistrationResponse,
   UserInitializationResponse,
 } from "../types/auth";
 import type { APP_ROUTES } from "../routes";
 import { apiFetch } from "../services/api";
+import { useAuth } from "./useAuth";
 
 interface UseRegistrationFlowOptions<T extends Record<string, string>> {
   initialFormData: T;
@@ -22,6 +23,7 @@ export function useRegistrationFlow<T extends Record<string, string>>({
   dashboardRoute,
 }: UseRegistrationFlowOptions<T>) {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [initData, setInitData] = useState<
     UserInitializationResponse["data"] | null
@@ -96,9 +98,10 @@ export function useRegistrationFlow<T extends Record<string, string>>({
         },
       );
 
-      // Handle auth storage and navigation on success
-      localStorage.setItem(STORAGE_KEYS.FARMXNAP_TOKEN, response.data.token);
+      // Persist access token
+      login(response.data.token, response.data.user.role);
 
+      //  Handle navigation to dashboard on success
       navigate(dashboardRoute, {
         // Persist display of the success message on the redirected page. Ensure to handle "successMessage" on the page with e.g useLocation
         state: { successMessage: response.message },
