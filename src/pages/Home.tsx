@@ -14,8 +14,8 @@ export function Home() {
       <Navigate
         to={
           userRole === UserRole.AGRODEALER
-            ? APP_ROUTES.AGRODEALER_DASHBOARD
-            : APP_ROUTES.FARMER_DASHBOARD
+            ? APP_ROUTES.AGRODEALER_DASHBOARD.ROOT
+            : APP_ROUTES.FARMER_DASHBOARD.ROOT
         }
       />
     );

@@ -10,6 +10,7 @@ import { AgroDealerRegistration } from "./pages/AgroDealerRegistration";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
 import { AuthProvider } from "./context/AuthProvider";
+import { FarmerDashboardLayout } from "./components/layouts/FarmerDashboardLayout";
 
 export default function App() {
   return (
@@ -36,16 +37,34 @@ export default function App() {
           <Route element={<ProtectedRoute allowedRoles={[UserRole.FARMER]} />}>
             {/* Farmer protected routes */}
             <Route
-              path={APP_ROUTES.FARMER_DASHBOARD}
-              element={<ProfileDashboardPlaceholder role={UserRole.FARMER} />}
-            />
+              path={APP_ROUTES.FARMER_DASHBOARD.ROOT}
+              element={<FarmerDashboardLayout />}
+            >
+              {/* Crop Diagnosis is dashboard default */}
+              <Route
+                index
+                element={<Construction title="Crop Diagnosis Page" />}
+              />
+              <Route
+                path={APP_ROUTES.FARMER_DASHBOARD.WALLET}
+                element={<Construction title="Wallet Page" />}
+              />
+              <Route
+                path={APP_ROUTES.FARMER_DASHBOARD.TRANSACTIONS}
+                element={<Construction title="Transaction History Page" />}
+              />
+              <Route
+                path={APP_ROUTES.FARMER_DASHBOARD.PROFILE}
+                element={<Construction title="Profile Page" />}
+              />
+            </Route>
           </Route>
           <Route
             element={<ProtectedRoute allowedRoles={[UserRole.AGRODEALER]} />}
           >
             {/* Agrodealer protected routes */}
             <Route
-              path={APP_ROUTES.AGRODEALER_DASHBOARD}
+              path={APP_ROUTES.AGRODEALER_DASHBOARD.ROOT}
               element={
                 <ProfileDashboardPlaceholder role={UserRole.AGRODEALER} />
               }

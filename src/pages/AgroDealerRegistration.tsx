@@ -9,7 +9,7 @@ import { Button } from "../components/Button";
 import { TransactionPinStep } from "./TransactionPinStep";
 import { BankAccountFields } from "../components/BankAccountFields";
 import { useRegistrationFlow } from "../hooks/useRegistrationFlow";
-import { RegistrationLayout } from "../components/RegistrationLayout";
+import { RegistrationLayout } from "../components/layouts/RegistrationLayout";
 
 export function AgroDealerRegistration() {
   const {
@@ -38,7 +38,7 @@ export function AgroDealerRegistration() {
       bank_code: "", // Supply the code that corresponds to the bank name the user selects.
       bank_account_number: "",
     },
-    dashboardRoute: APP_ROUTES.AGRODEALER_DASHBOARD,
+    dashboardRoute: APP_ROUTES.AGRODEALER_DASHBOARD.ROOT,
     linkKey: "create_agro_dealer_profile",
   });
 

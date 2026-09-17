@@ -1,9 +1,9 @@
 import type React from "react";
-import styles from "../pages/Auth.module.css";
-import { ErrorMessage } from "./ErrorMessage";
+import styles from "../../pages/Auth.module.css";
+import { ErrorMessage } from "../ErrorMessage";
 import { Link } from "react-router-dom";
-import { BackLink } from "./BackLink";
-import { APP_ROUTES } from "../routes";
+import { BackLink } from "../BackLink";
+import { APP_ROUTES } from "../../routes";
 
 interface RegistrationLayoutProps {
   icon: React.ReactNode;

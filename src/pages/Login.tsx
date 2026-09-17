@@ -119,9 +119,9 @@ export function Login() {
 
       // Redirect user to dashboard depending on role
       if (role === UserRole.FARMER) {
-        navigate(APP_ROUTES.FARMER_DASHBOARD);
+        navigate(APP_ROUTES.FARMER_DASHBOARD.ROOT);
       } else if (role === UserRole.AGRODEALER) {
-        navigate(APP_ROUTES.AGRODEALER_DASHBOARD);
+        navigate(APP_ROUTES.AGRODEALER_DASHBOARD.ROOT);
       } else {
         navigate(APP_ROUTES.HOME);
       }

@@ -4,6 +4,14 @@ export const APP_ROUTES = {
   SIGNUP_FARMER: "/signup/farmer",
   SIGNUP_AGRODEALER: "/signup/agrodealer",
   LOGIN: "/login",
-  FARMER_DASHBOARD: "/farmer/dashboard",
-  AGRODEALER_DASHBOARD: "/agrodealer/dashboard",
+
+  FARMER_DASHBOARD: {
+    ROOT: "/farmer/dashboard",
+    DIAGNOSIS: "/farmer/dashboard", // Default dashboard view is Crop Diagnosis
+    WALLET: "/farmer/dashboard/wallet",
+    TRANSACTIONS: "/farmer/dashboard/transactions",
+    PROFILE: "/farmer/dashboard/profile",
+  },
+
+  AGRODEALER_DASHBOARD: { ROOT: "/agrodealer/dashboard" },
 } as const;
