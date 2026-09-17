@@ -7,7 +7,7 @@ import { APP_ROUTES } from "../routes";
 import { LocationSelect } from "../components/LocationSelect";
 import { TransactionPinStep } from "./TransactionPinStep";
 import { useRegistrationFlow } from "../hooks/useRegistrationFlow";
-import { RegistrationLayout } from "../components/RegistrationLayout";
+import { RegistrationLayout } from "../components/layouts/RegistrationLayout";
 
 export function FarmerRegistration() {
   const {

@@ -9,7 +9,7 @@ import { Button } from "../components/Button";
 import { TransactionPinStep } from "./TransactionPinStep";
 import { BankAccountFields } from "../components/BankAccountFields";
 import { useRegistrationFlow } from "../hooks/useRegistrationFlow";
-import { RegistrationLayout } from "../components/RegistrationLayout";
+import { RegistrationLayout } from "../components/layouts/RegistrationLayout";
 
 export function AgroDealerRegistration() {
   const {
