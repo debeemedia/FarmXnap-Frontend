@@ -13,8 +13,8 @@ interface UseRegistrationFlowOptions<T extends Record<string, string>> {
   initialFormData: T;
   linkKey: "create_farmer_profile" | "create_agro_dealer_profile";
   dashboardRoute:
-    | typeof APP_ROUTES.FARMER_DASHBOARD
-    | typeof APP_ROUTES.AGRODEALER_DASHBOARD;
+    | typeof APP_ROUTES.FARMER_DASHBOARD.ROOT
+    | typeof APP_ROUTES.AGRODEALER_DASHBOARD.ROOT;
 }
 
 export function useRegistrationFlow<T extends Record<string, string>>({

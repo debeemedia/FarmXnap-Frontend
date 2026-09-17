@@ -35,7 +35,7 @@ export function FarmerRegistration() {
       address: "",
       primary_crop: "",
     },
-    dashboardRoute: APP_ROUTES.FARMER_DASHBOARD,
+    dashboardRoute: APP_ROUTES.FARMER_DASHBOARD.ROOT,
     linkKey: "create_farmer_profile",
   });
 

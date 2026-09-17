@@ -36,7 +36,7 @@ export default function App() {
           <Route element={<ProtectedRoute allowedRoles={[UserRole.FARMER]} />}>
             {/* Farmer protected routes */}
             <Route
-              path={APP_ROUTES.FARMER_DASHBOARD}
+              path={APP_ROUTES.FARMER_DASHBOARD.ROOT}
               element={<ProfileDashboardPlaceholder role={UserRole.FARMER} />}
             />
           </Route>
@@ -45,7 +45,7 @@ export default function App() {
           >
             {/* Agrodealer protected routes */}
             <Route
-              path={APP_ROUTES.AGRODEALER_DASHBOARD}
+              path={APP_ROUTES.AGRODEALER_DASHBOARD.ROOT}
               element={
                 <ProfileDashboardPlaceholder role={UserRole.AGRODEALER} />
               }
