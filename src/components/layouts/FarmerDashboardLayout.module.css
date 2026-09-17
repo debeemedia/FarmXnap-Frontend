@@ -91,6 +91,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-xs);
   flex-shrink: 0;
 }
 
@@ -106,6 +107,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-xs);
+  flex-shrink: 0; /* Prevents container from collapsing */
 }
 
 .brandIcon {
@@ -119,6 +121,7 @@
   font-weight: 700;
   color: var(--color-primary);
   letter-spacing: -0.02em;
+  white-space: nowrap; /* Prevents line wrapping */
 }
 
 .walletIcon {
@@ -138,6 +141,8 @@
   border-radius: 9999px;
   font-weight: 600;
   font-size: 0.875rem;
+  white-space: nowrap; /* Prevents badge content from stacking */
+  flex-shrink: 0;
 }
 
 /* Mobile Bottom Navigation Bar */
@@ -190,11 +195,34 @@
   }
 
   .topHeader {
-    padding: 0 var(--space-md);
+    padding: 0 var(--space-sm);
   }
 
   .walletBadge {
     padding: var(--space-xs) var(--space-sm);
     font-size: 0.8rem;
+  }
+}
+
+/* Extra breakpoint for compact phones (<= 480px) */
+@media (max-width: 480px) {
+  .brandIcon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .brandText {
+    font-size: 1.05rem;
+  }
+
+  .walletBadge {
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  .walletIcon {
+    width: 14px;
+    height: 14px;
   }
 }
