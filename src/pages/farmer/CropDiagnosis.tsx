@@ -144,7 +144,6 @@ export function CropDiagnosis() {
         onChange={handleFileChange}
         className={styles.hiddenInput}
         accept={ACCEPTED_TYPES.join(", ")}
-        capture="environment"
       />
 
       {/* Upload Zone or Image Preview */}
