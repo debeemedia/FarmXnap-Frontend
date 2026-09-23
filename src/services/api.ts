@@ -6,17 +6,24 @@ const API_PREFIX = import.meta.env.VITE_API_PREFIX;
 
 type RequestOptions = RequestInit & {
   requiresAuth?: boolean;
+  isFileUpload?: boolean;
 };
 
 export async function apiFetch<T>(
   path: string,
   options: RequestOptions = {},
 ): Promise<T> {
-  const { requiresAuth = false, headers, ...restOptions } = options;
+  const {
+    requiresAuth = false,
+    isFileUpload = false,
+    headers,
+    ...restOptions
+  } = options;
 
   // 1. Construct Request Headers
   const requestHeaders: Record<string, string> = {
-    "Content-Type": "application/json",
+    ...(!isFileUpload && { "Content-Type": "application/json" }),
+
     ...(headers as Record<string, string>),
   };
 

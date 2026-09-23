@@ -1,0 +1,340 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.subtitle {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+.hiddenInput {
+  display: none;
+}
+
+/* Upload Dropzone Card */
+.uploadCard {
+  background-color: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-xl) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: var(--space-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.uploadCard:hover {
+  border-color: var(--color-primary);
+  background-color: var(--color-soft-green-bg);
+}
+
+.cameraCircle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--color-soft-green-bg);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cameraIcon {
+  width: 28px;
+  height: 28px;
+}
+
+.uploadTextGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.primaryText {
+  font-weight: 600;
+  color: var(--color-text-main);
+  font-size: 1rem;
+}
+
+.secondaryText {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Image Preview */
+.previewCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-sm);
+  display: flex;
+  justify-content: center;
+}
+
+.previewImage {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+}
+
+.actionRow {
+  display: flex;
+  gap: var(--space-md);
+}
+
+/* Results Card */
+.resultsCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.diagnosisHeader {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-sm);
+}
+
+.cropBadge {
+  display: inline-block;
+  background-color: var(--color-soft-green-bg);
+  color: var(--color-soft-green-text);
+  border: 1px solid var(--color-soft-green-border);
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.diseaseTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+}
+
+.sectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.sectionHeading {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.instructionsText {
+  font-size: 0.925rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Treatment List Grid */
+.treatmentGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.treatmentCard {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border-radius: var(--radius-card);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Treatment Header Badges */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.rankBadge {
+  font-size: 0.725rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.rankBadge.bestMatch {
+  background-color: #d1fae5;
+  color: #065f46;
+  border: 1px solid #6ee7b7;
+  font-weight: 700;
+}
+
+.rankBadge.recommended {
+  background-color: var(--color-soft-green-bg);
+  color: var(--color-soft-green-text);
+  border: 1px solid var(--color-soft-green-border);
+}
+
+.rankBadge.general {
+  background-color: var(--color-bg);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+}
+
+.categoryBadge {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  background-color: var(--color-bg);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+}
+
+/* Title & Pricing Layout */
+.treatmentTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+}
+
+.treatmentName {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-text-main);
+  margin: 0;
+  flex: 1;
+}
+
+.priceContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.treatmentPrice {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  line-height: 1.2;
+}
+
+.stockText {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Product Info */
+.treatmentIngredient,
+.targetProblems,
+.treatmentDesc {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* AgroDealer Details */
+.dealerBox {
+  margin-top: var(--space-xs);
+  padding-top: var(--space-xs);
+  border-top: 1px dashed var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+}
+
+.dealerName {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.dealerDetailRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  word-break: break-word;
+}
+
+.dealerIcon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.dealerPhoneLink {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.dealerPhoneLink:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .resultsCard {
+    padding: var(--space-md);
+  }
+
+  .treatmentCard {
+    padding: var(--space-sm);
+  }
+
+  .treatmentTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .priceContainer {
+    align-items: flex-start;
+    flex-direction: row;
+    align-items: baseline;
+    gap: var(--space-xs);
+  }
+
+  .stockText::before {
+    content: "•";
+    margin-right: var(--space-xs);
+  }
+
+  .actionRow {
+    flex-direction: column;
+  }
+}
