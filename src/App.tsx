@@ -11,6 +11,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { useAuth } from "./hooks/useAuth";
 import { AuthProvider } from "./context/AuthProvider";
 import { FarmerDashboardLayout } from "./components/layouts/FarmerDashboardLayout";
+import { CropDiagnosis } from "./pages/farmer/CropDiagnosis";
 
 export default function App() {
   return (
@@ -41,10 +42,7 @@ export default function App() {
               element={<FarmerDashboardLayout />}
             >
               {/* Crop Diagnosis is dashboard default */}
-              <Route
-                index
-                element={<Construction title="Crop Diagnosis Page" />}
-              />
+              <Route index element={<CropDiagnosis />} />
               <Route
                 path={APP_ROUTES.FARMER_DASHBOARD.WALLET}
                 element={<Construction title="Wallet Page" />}
