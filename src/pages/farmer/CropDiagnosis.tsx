@@ -309,8 +309,8 @@ export function CropDiagnosis() {
                 })}
               </div>
             </div>
-          ) : (
-            /* Empty State when no agrodealer treatments are found */
+          ) : diagnosisResult.diagnosis.disease ? (
+            /* Render Empty State ONLY when crop is diseased AND no agrodealer treatments are available */
             <div className={styles.emptyTreatmentCard}>
               <p className={styles.emptyTreatmentText}>
                 No recommended treatments currently available from nearby
@@ -321,7 +321,7 @@ export function CropDiagnosis() {
                 for recommended alternatives.
               </span>
             </div>
-          )}
+          ) : null}
         </section>
       )}
 
@@ -356,12 +356,14 @@ type Treatment = {
 type Diagnosis = {
   crop: string;
   instructions: string;
+  // `disease` is not returned for healthy crop.
   disease?: string;
 };
 
 type CropScanResponse = {
   data: {
     diagnosis: Diagnosis;
+    // `treatments` is not returned for healthy crop. Note that `treatments` can be an empty array for diseased crop with no treatments found.
     treatments?: Treatment[];
   };
 };
