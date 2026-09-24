@@ -8,6 +8,10 @@ import styles from "./CropDiagnosis.module.css";
 import { CropDiagnosesHistory } from "./CropDiagnosesHistory";
 import { formatPrice, getScanMatchLabel } from "../../utils/helpers";
 
+/**
+ * @todo: Much later, allow for camera scan on desktop.
+ */
+
 export function CropDiagnosis() {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
