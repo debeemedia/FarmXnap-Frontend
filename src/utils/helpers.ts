@@ -49,3 +49,22 @@ export const getScanMatchLabel = (rank: number) => {
 
   return { label: "General Treatment", style: "general" };
 };
+
+/**
+ * Helper to format ISO date string cleanly (e.g., "Oct 31, 2026")
+ */
+export function formatDate(dateString: string): string {
+  try {
+    return new Intl.DateTimeFormat("en-NG", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      timeZoneName: "shortOffset"
+    }).format(new Date(dateString));
+  } catch {
+    return dateString;
+  }
+}

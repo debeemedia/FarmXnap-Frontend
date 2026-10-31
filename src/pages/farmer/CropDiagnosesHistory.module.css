@@ -14,46 +14,96 @@
   margin: 0;
 }
 
-/* Empty / Under Construction Placeholder State */
-.emptyState {
+/* Unordered List */
+.historyList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: var(--space-xl) var(--space-md);
-  background-color: var(--color-bg);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius-card);
-  gap: var(--space-xs);
+  gap: var(--space-sm);
 }
 
-.emptyIconCircle {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: var(--color-secondary-bg-hover);
-  color: var(--color-secondary);
+/* History Item Card */
+.historyItem {
+  padding: var(--space-md);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  cursor: pointer;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.historyItem:hover {
+  border-color: var(--color-primary,);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.historyItemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.historyCropInfo {
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.historyDate {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+/* Native Dialog Modal & Centering */
+.historyModal {
+  margin: auto; /* Centers the dialog perfectly in the viewport */
+  border: none;
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
+  width: 100%;
+  max-width: 680px;
+  max-height: 85vh;
+  background-color: var(--color-bg,);
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Native Dialog Backdrop */
+.historyModal::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
   margin-bottom: var(--space-xs);
 }
 
-.emptyIcon {
-  width: 24px;
-  height: 24px;
-}
-
-.emptyText {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--color-text-main);
-  margin: 0;
-}
-
-.emptySubtext {
-  font-size: 0.85rem;
+.modalCloseBtn {
+  text-decoration: none !important;
+  font-size: 1.25rem;
+  padding: 4px 8px;
   color: var(--color-text-muted);
-  line-height: 1.4;
+}
+
+.modalCloseBtn:hover {
+  color: var(--color-text-main);
+  background-color: var(--color-secondary-bg-hover,);
+  border-radius: var(--radius-sm, 4px);
+}
+
+/* Loading & Empty Texts */
+.loadingText,
+.emptyText {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-md);
+  margin: 0;
 }
