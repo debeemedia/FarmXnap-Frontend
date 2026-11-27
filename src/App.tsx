@@ -12,67 +12,81 @@ import { useAuth } from "./hooks/useAuth";
 import { AuthProvider } from "./context/AuthProvider";
 import { FarmerDashboardLayout } from "./components/layouts/FarmerDashboardLayout";
 import { CropDiagnosis } from "./pages/farmer/CropDiagnosis";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <Routes>
-          {/* Landing screen */}
-          <Route path={APP_ROUTES.HOME} element={<Home />} />
-          {/* Role selection screen */}
-          <Route path={APP_ROUTES.SELECT_ROLE} element={<RoleSelection />} />
-          {/* Farmer signup form */}
-          <Route
-            path={APP_ROUTES.SIGNUP_FARMER}
-            element={<FarmerRegistration />}
-          />
-          {/* Agrodealer signup form */}
-          <Route
-            path={APP_ROUTES.SIGNUP_AGRODEALER}
-            element={<AgroDealerRegistration />}
-          />
-          {/* Login screen */}
-          <Route path={APP_ROUTES.LOGIN} element={<Login />} />
-          {/* PROTECTED ROUTES */}
-          <Route element={<ProtectedRoute allowedRoles={[UserRole.FARMER]} />}>
-            {/* Farmer protected routes */}
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <Routes>
+            {/* Landing screen */}
+            <Route path={APP_ROUTES.HOME} element={<Home />} />
+            {/* Role selection screen */}
+            <Route path={APP_ROUTES.SELECT_ROLE} element={<RoleSelection />} />
+            {/* Farmer signup form */}
             <Route
-              path={APP_ROUTES.FARMER_DASHBOARD.ROOT}
-              element={<FarmerDashboardLayout />}
+              path={APP_ROUTES.SIGNUP_FARMER}
+              element={<FarmerRegistration />}
+            />
+            {/* Agrodealer signup form */}
+            <Route
+              path={APP_ROUTES.SIGNUP_AGRODEALER}
+              element={<AgroDealerRegistration />}
+            />
+            {/* Login screen */}
+            <Route path={APP_ROUTES.LOGIN} element={<Login />} />
+            {/* PROTECTED ROUTES */}
+            <Route
+              element={<ProtectedRoute allowedRoles={[UserRole.FARMER]} />}
             >
-              {/* Crop Diagnosis is dashboard default */}
-              <Route index element={<CropDiagnosis />} />
+              {/* Farmer protected routes */}
               <Route
-                path={APP_ROUTES.FARMER_DASHBOARD.WALLET}
-                element={<Construction title="Wallet Page" />}
-              />
+                path={APP_ROUTES.FARMER_DASHBOARD.ROOT}
+                element={<FarmerDashboardLayout />}
+              >
+                {/* Crop Diagnosis is dashboard default */}
+                <Route index element={<CropDiagnosis />} />
+                <Route
+                  path={APP_ROUTES.FARMER_DASHBOARD.WALLET}
+                  element={<Construction title="Wallet Page" />}
+                />
+                <Route
+                  path={APP_ROUTES.FARMER_DASHBOARD.TRANSACTIONS}
+                  element={<Construction title="Transaction History Page" />}
+                />
+                <Route
+                  path={APP_ROUTES.FARMER_DASHBOARD.PROFILE}
+                  element={<Construction title="Profile Page" />}
+                />
+              </Route>
+            </Route>
+            <Route
+              element={<ProtectedRoute allowedRoles={[UserRole.AGRODEALER]} />}
+            >
+              {/* Agrodealer protected routes */}
               <Route
-                path={APP_ROUTES.FARMER_DASHBOARD.TRANSACTIONS}
-                element={<Construction title="Transaction History Page" />}
-              />
-              <Route
-                path={APP_ROUTES.FARMER_DASHBOARD.PROFILE}
-                element={<Construction title="Profile Page" />}
+                path={APP_ROUTES.AGRODEALER_DASHBOARD.ROOT}
+                element={
+                  <ProfileDashboardPlaceholder role={UserRole.AGRODEALER} />
+                }
               />
             </Route>
-          </Route>
-          <Route
-            element={<ProtectedRoute allowedRoles={[UserRole.AGRODEALER]} />}
-          >
-            {/* Agrodealer protected routes */}
-            <Route
-              path={APP_ROUTES.AGRODEALER_DASHBOARD.ROOT}
-              element={
-                <ProfileDashboardPlaceholder role={UserRole.AGRODEALER} />
-              }
-            />
-          </Route>
-          {/* Any general protected route (accessible by any logged-in user) */}
-          <Route element={<ProtectedRoute />}></Route>
-        </Routes>
-      </AuthProvider>
-    </BrowserRouter>
+            {/* Any general protected route (accessible by any logged-in user) */}
+            <Route element={<ProtectedRoute />}></Route>
+          </Routes>
+        </AuthProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

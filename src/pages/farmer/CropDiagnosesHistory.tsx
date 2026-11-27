@@ -6,6 +6,8 @@ import { apiFetch } from "../../services/api";
 import { Button } from "../../components/Button";
 import { CropDiagnosisDetail } from "../../components/farmer/CropDiagnosisDetail";
 import { formatDate } from "../../utils/helpers";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../../constants/queryKeys";
 
 type CropScanHistory = Diagnosis & {
   id: string;
@@ -22,34 +24,27 @@ type CropScanTreatmentsResponse = {
 };
 
 export function CropDiagnosesHistory() {
-  const [loadingHistories, setLoadingHistories] = useState(false);
   const [loadingTreatments, setLoadingTreatments] = useState(false);
-  const [histories, setHistories] = useState<CropScanHistory[]>();
   const [selectedHistory, setSelectedHistory] =
     useState<CropScanHistory | null>(null);
   const [treatments, setTreatments] = useState<Treatment[]>();
 
-  useEffect(() => {
-    (async () => {
-      setLoadingHistories(true);
+  const {
+    data: histories = [],
+    isPending,
+    isFetching,
+    refetch,
+  } = useQuery({
+    queryKey: [QUERY_KEYS.CROP_SCAN_HISTORY],
+    queryFn: async () => {
+      const response = await apiFetch<CropScanHistoryResponse>("/crop_scans", {
+        method: "GET",
+        requiresAuth: true,
+      });
 
-      try {
-        const response = await apiFetch<CropScanHistoryResponse>(
-          "/crop_scans",
-          {
-            method: "GET",
-            requiresAuth: true,
-          },
-        );
-
-        setHistories(response["data"]);
-      } catch (err) {
-        console.error("Failed to get diagnoses history:", err);
-      } finally {
-        setLoadingHistories(false);
-      }
-    })();
-  }, []);
+      return response.data;
+    },
+  });
 
   useEffect(() => {
     (async () => {
@@ -86,13 +81,29 @@ export function CropDiagnosesHistory() {
 
   return (
     <section className={styles.historySection}>
-      <h2 className={styles.historyTitle}>Recent Diagnoses & History</h2>
+      <div className={styles.historyHeader}>
+        <h2 className={styles.historyTitle}>Recent Diagnoses & History</h2>
 
-      {loadingHistories ? (
+        <Button
+          variant="text"
+          type="button"
+          loading={isFetching}
+          disabled={isFetching}
+          loadingText="Refreshing history..."
+          onClick={() => refetch()}
+          className={styles.refreshBtn}
+          aria-label="Refresh diagnoses history"
+          title="Refresh diagnoses history"
+        >
+          ↻
+        </Button>
+      </div>
+
+      {isPending ? (
         <p className={styles.loadingText}>Loading your diagnoses history...</p>
-      ) : histories?.length ? (
+      ) : histories.length ? (
         <ul className={styles.historyList}>
-          {histories?.map((history) => {
+          {histories.map((history) => {
             return (
               <li
                 key={history.id}
