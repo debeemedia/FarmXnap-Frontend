@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AUTH_ERROR_EVENT } from "../constants/events";
 import { STORAGE_KEYS, UserRole } from "../constants/auth";
 import { apiFetch } from "../services/api";
@@ -29,7 +29,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
    * clearAuth() is for when we already know the user is no longer authenticated.
    */
 
-  const clearAuth = () => {
+  const clearAuth = useCallback(() => {
     localStorage.removeItem(STORAGE_KEYS.FARMXNAP_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.FARMXNAP_USER_ROLE);
     // Clear all cached data
@@ -37,7 +37,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     setToken(null);
     setUserRole(null);
-  };
+  }, [queryClient]);
 
   const logout = async () => {
     try {
@@ -65,7 +65,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return () => {
       window.removeEventListener(AUTH_ERROR_EVENT, handleUnauthorized);
     };
-  }, []);
+  }, [clearAuth]);
 
   return (
     <AuthContext value={{ token, userRole, logout, login }}>
