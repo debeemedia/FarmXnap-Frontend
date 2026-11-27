@@ -7,6 +7,8 @@ import styles from "./CropDiagnosis.module.css";
 import { CropDiagnosesHistory } from "./CropDiagnosesHistory";
 import type { CropScanResponse } from "../../types/crop_diagnosis";
 import { CropDiagnosisDetail } from "../../components/farmer/CropDiagnosisDetail";
+import { useQueryClient } from "@tanstack/react-query";
+import { QUERY_KEYS } from "../../constants/queryKeys";
 
 /**
  * @todo: Much later, allow for camera scan on desktop.
@@ -22,6 +24,8 @@ export function CropDiagnosis() {
   >(null);
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     return () => {
@@ -108,6 +112,11 @@ export function CropDiagnosis() {
       });
 
       setDiagnosisResult(response.data);
+
+      // Invalidate the cached crop scan history to trigger a refetch
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEYS.CROP_SCAN_HISTORY],
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to scan image.");
     } finally {

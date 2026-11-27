@@ -3,6 +3,7 @@ import { AUTH_ERROR_EVENT } from "../constants/events";
 import { STORAGE_KEYS, UserRole } from "../constants/auth";
 import { apiFetch } from "../services/api";
 import { AuthContext } from "./AuthContext";
+import { useQueryClient } from "@tanstack/react-query";
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState(() =>
@@ -11,8 +12,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [userRole, setUserRole] = useState<UserRole | null>(
     () => localStorage.getItem(STORAGE_KEYS.FARMXNAP_USER_ROLE) as UserRole,
   );
+  const queryClient = useQueryClient();
 
   const login = (token: string, userRole: UserRole) => {
+    // Defensive: Clear all cached data
+    queryClient.clear();
     localStorage.setItem(STORAGE_KEYS.FARMXNAP_TOKEN, token);
     localStorage.setItem(STORAGE_KEYS.FARMXNAP_USER_ROLE, userRole);
 
@@ -28,6 +32,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const clearAuth = () => {
     localStorage.removeItem(STORAGE_KEYS.FARMXNAP_TOKEN);
     localStorage.removeItem(STORAGE_KEYS.FARMXNAP_USER_ROLE);
+    // Clear all cached data
+    queryClient.clear();
 
     setToken(null);
     setUserRole(null);
