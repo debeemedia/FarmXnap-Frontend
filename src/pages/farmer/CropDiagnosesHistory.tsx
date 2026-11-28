@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import styles from "./CropDiagnosesHistory.module.css";
 import type { Diagnosis, Treatment } from "../../types/crop_diagnosis";
 import type { ApiLink } from "../../types/common";
-import { apiFetch } from "../../services/api";
+import { apiFetch, is4xxApiError } from "../../services/api";
 import { Button } from "../../components/Button";
 import { CropDiagnosisDetail } from "../../components/farmer/CropDiagnosisDetail";
 import { formatDate } from "../../utils/helpers";
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEYS } from "../../constants/queryKeys";
+import { ErrorMessage } from "../../components/ErrorMessage";
 
 type CropScanHistory = Diagnosis & {
   id: string;
@@ -34,6 +35,7 @@ export function CropDiagnosesHistory() {
     isPending,
     isRefetching,
     refetch,
+    error: diagnosesHistoryError,
   } = useQuery({
     queryKey: [QUERY_KEYS.CROP_SCAN_HISTORY],
     queryFn: async () => {
@@ -43,6 +45,12 @@ export function CropDiagnosesHistory() {
       });
 
       return response.data;
+    },
+    retry: (failureCount, error) => {
+      if (is4xxApiError(error)) {
+        return false;
+      }
+      return failureCount < 3;
     },
   });
 
@@ -98,6 +106,10 @@ export function CropDiagnosesHistory() {
           ↻
         </Button>
       </div>
+
+      {diagnosesHistoryError && (
+        <ErrorMessage errorMessage={diagnosesHistoryError.message} />
+      )}
 
       {isPending ? (
         <p className={styles.loadingText}>Loading your diagnoses history...</p>
