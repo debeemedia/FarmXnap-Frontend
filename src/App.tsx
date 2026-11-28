@@ -13,6 +13,7 @@ import { AuthProvider } from "./context/AuthProvider";
 import { FarmerDashboardLayout } from "./components/layouts/FarmerDashboardLayout";
 import { CropDiagnosis } from "./pages/farmer/CropDiagnosis";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WalletTopup } from "./pages/WalletTopup";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -58,7 +59,7 @@ export default function App() {
                 <Route index element={<CropDiagnosis />} />
                 <Route
                   path={APP_ROUTES.FARMER_DASHBOARD.WALLET}
-                  element={<Construction title="Wallet Page" />}
+                  element={<WalletTopup />}
                 />
                 <Route
                   path={APP_ROUTES.FARMER_DASHBOARD.TRANSACTIONS}
