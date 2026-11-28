@@ -32,7 +32,7 @@ export function CropDiagnosesHistory() {
   const {
     data: histories = [],
     isPending,
-    isFetching,
+    isRefetching,
     refetch,
   } = useQuery({
     queryKey: [QUERY_KEYS.CROP_SCAN_HISTORY],
@@ -87,8 +87,8 @@ export function CropDiagnosesHistory() {
         <Button
           variant="text"
           type="button"
-          loading={isFetching}
-          disabled={isFetching}
+          loading={isRefetching}
+          disabled={isPending || isRefetching}
           loadingText="Refreshing history..."
           onClick={() => refetch()}
           className={styles.refreshBtn}
