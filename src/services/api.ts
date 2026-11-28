@@ -62,9 +62,29 @@ export async function apiFetch<T>(
 
     const errorMessage =
       errorData.error || errorData.errors?.[0] || "An error occurred";
-    throw new Error(errorMessage);
+    throw new ApiError(errorMessage, response.status, errorData);
   }
 
   // 5. Parse and return JSON
   return response.json() as Promise<T>;
+}
+
+export class ApiError extends Error {
+  status: number;
+  data?: unknown;
+
+  constructor(message: string, status: number, data?: unknown) {
+    super(message);
+    this.name = "ApiError";
+    this.status = status;
+    this.data = data;
+  }
+}
+
+export function is4xxApiError(error: Error) {
+  if (error instanceof ApiError && error.status >= 400 && error.status < 500) {
+    return true;
+  }
+
+  return false;
 }
